@@ -14,17 +14,23 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 
 public class createAcoou extends AppCompatActivity {
 
-    private EditText editTextUsername, editTextEmail, editTextNumber, editTextPassword;
+    private EditText editTextUsername, editTextAge, editTextEmail, editTextNumber, editTextPassword;
     private RadioGroup radioGroup;
-    private RadioButton radioButton;
+
+    DatabaseReference databaseReference1;
+    private RadioButton gender;
     private Button buttonSignUp;
     private TextView textSignIn;
     ProgressBar progressBar;
@@ -36,7 +42,7 @@ public class createAcoou extends AppCompatActivity {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
+        if (currentUser != null) {
             Intent intent = new Intent(getApplicationContext(), homeP.class);
             startActivity(intent);
             finish();
@@ -48,14 +54,16 @@ public class createAcoou extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_acoou);
         mAuth = FirebaseAuth.getInstance();
-        editTextUsername = findViewById(R.id.editTextUsername);
         editTextEmail = findViewById(R.id.editTextEmail);
-        editTextNumber = findViewById(R.id.editTextNumber);
         editTextPassword = findViewById(R.id.editTextPassword);
-        radioGroup = findViewById(R.id.radioGroup);
         buttonSignUp = findViewById(R.id.buttonSignUp);
         textSignIn = findViewById(R.id.textSignIn);
         progressBar = findViewById(R.id.progressBar);
+        editTextAge = findViewById(R.id.editTextAge);
+        editTextUsername = findViewById(R.id.editTextUsername);
+        editTextNumber = findViewById(R.id.editTextNumber);
+        radioGroup = findViewById(R.id.radioGroup);
+
 
         textSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,12 +84,24 @@ public class createAcoou extends AppCompatActivity {
 
 
     }
-
+//    editTextEmail,editTextPassword,editTextAge,editTextUsername,editTextNumber,radioGroup
 
     private void registerUser() {
         progressBar.setVisibility((View.VISIBLE));
         String email = String.valueOf(editTextEmail.getText());
         String password = String.valueOf(editTextPassword.getText());
+        String username = String.valueOf(editTextUsername.getText());
+        String number = String.valueOf(editTextNumber.getText());
+        int selectedId = radioGroup.getCheckedRadioButtonId();
+        gender = (RadioButton) findViewById(selectedId);
+        String valueGender = gender.getText().toString();
+      String age = editTextAge.getText().toString().trim();
+
+//  resultTextView.setText("You selected : "+valueGender);
+
+
+
+
 
         if (TextUtils.isEmpty(email)) {
 
@@ -101,6 +121,14 @@ public class createAcoou extends AppCompatActivity {
                         progressBar.setVisibility(View.GONE);
                         if (task.isSuccessful()) {
                             FirebaseUser user = mAuth.getCurrentUser();
+                            databaseReference1 = FirebaseDatabase.getInstance().getReference("users");
+
+                            String key = databaseReference1.push().getKey();
+
+                            siteuser siteu = new siteuser(username,age,number,email,valueGender);
+
+                            databaseReference1.child(key).setValue(siteu);
+
                             Toast.makeText(createAcoou.this, "Registration successful!", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(getApplicationContext(), homeP.class);
                             startActivity(intent);

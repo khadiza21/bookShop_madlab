@@ -9,15 +9,22 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+
+import com.google.firebase.auth.FirebaseAuth;
+
 public class nabberclick extends AppCompatActivity {
 
    Button home, profile,about,contact,logout;
+   FirebaseAuth mAuth;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nabberclick);
+
+        mAuth =FirebaseAuth.getInstance();
 
         home=(Button) findViewById(R.id.btnHome);
         profile=(Button) findViewById(R.id.btnProfile);
@@ -74,6 +81,8 @@ public class nabberclick extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(), "Sign Out", Toast.LENGTH_SHORT).show();
+                FirebaseAuth.getInstance().signOut();
+                finish();
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
                 Toast.makeText(nabberclick.this, "Redirecting..", Toast.LENGTH_SHORT).show();

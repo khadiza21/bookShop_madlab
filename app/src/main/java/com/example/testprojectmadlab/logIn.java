@@ -81,6 +81,8 @@ public class logIn extends AppCompatActivity {
         String email = String.valueOf(editTextEmail.getText());
         String password = String.valueOf(editTextPassword.getText());
 
+
+
         if (TextUtils.isEmpty(email)) {
 
             Toast.makeText(logIn.this, "Enter email", Toast.LENGTH_SHORT).show();

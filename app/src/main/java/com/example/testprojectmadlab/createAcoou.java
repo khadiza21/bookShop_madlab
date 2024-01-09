@@ -26,7 +26,7 @@ public class createAcoou extends AppCompatActivity {
     private EditText editTextUsername, editTextAge, editTextEmail, editTextNumber, editTextPassword;
     private RadioGroup radioGroup;
 
-   DatabaseReference databaseReference1;
+  DatabaseReference databaseReference1;
     private RadioButton gender;
     private Button buttonSignUp;
     private TextView textSignIn;
@@ -96,11 +96,7 @@ public class createAcoou extends AppCompatActivity {
 
 //  resultTextView.setText("You selected : "+valueGender);
 
-
-
-
-
-        if (TextUtils.isEmpty(email)) {
+   if (TextUtils.isEmpty(email)) {
 
             Toast.makeText(createAcoou.this, "Enter email", Toast.LENGTH_SHORT).show();
             return;

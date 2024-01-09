@@ -23,17 +23,12 @@ public class nabberclick extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nabberclick);
-
         mAuth =FirebaseAuth.getInstance();
-
         home=(Button) findViewById(R.id.btnHome);
         profile=(Button) findViewById(R.id.btnProfile);
         about=(Button) findViewById(R.id.btnAbout);
         contact=(Button) findViewById(R.id.btnContact);
         logout=(Button) findViewById(R.id.btnlogout);
-
-
-
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -43,7 +38,6 @@ public class nabberclick extends AppCompatActivity {
                 Toast.makeText(nabberclick.this, "Redirecting..", Toast.LENGTH_SHORT).show();
             }
         });
-
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -53,8 +47,6 @@ public class nabberclick extends AppCompatActivity {
                 Toast.makeText(nabberclick.this, "Redirecting..", Toast.LENGTH_SHORT).show();
             }
         });
-
-
         about.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -64,7 +56,6 @@ public class nabberclick extends AppCompatActivity {
                 Toast.makeText(nabberclick.this, "Redirecting..", Toast.LENGTH_SHORT).show();
             }
         });
-
 
         contact.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -13,6 +13,12 @@
         android:theme="@style/Theme.TestProjectMadLab"
         tools:targetApi="31">
         <activity
+            android:name=".bookDetail"
+            android:exported="false" />
+        <activity
+            android:name=".bookList"
+            android:exported="false" />
+        <activity
             android:name=".exitWell"
             android:exported="false" />
         <activity

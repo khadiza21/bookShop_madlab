@@ -4,6 +4,10 @@ public class siteuser {
 
     private  String name, age, number, email, gender;
 
+    public siteuser() {
+    }
+
+
     public siteuser(String name, String age, String number, String email, String gender) {
         this.name = name;
         this.age = age;
